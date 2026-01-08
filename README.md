@@ -2,6 +2,8 @@
 
 Hosted multi-tenant A/B testing platform for EdTech, built on [Carnegie Learning's UpGrade](https://github.com/CarnegieLearningWeb/UpGrade).
 
+**[Live Demo](https://upgrade-demo.vercel.app)** - Interactive walkthrough of A/B testing for education
+
 ## Why EdTech Needs Specialized A/B Testing
 
 Generic A/B testing tools (Optimizely, LaunchDarkly) fail in education because:
@@ -65,13 +67,16 @@ cd apps/demo && npm run dev               # Port 3003
 
 ### Try the Demo
 
+**Live:** https://upgrade-demo.vercel.app
+
+Or run locally:
 ```bash
 cd apps/demo
 npm install
 npm run dev
 ```
 
-Open http://localhost:3003 to see an interactive walkthrough of:
+The demo walks through:
 - District-level tenant isolation (LAUSD vs Chicago)
 - Educational experiment (progressive hints for math problems)
 - Learning outcome metrics (completion rate, assessment scores)
