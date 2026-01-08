@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  # Platform Database (simulates Neon main branch)
+  platform-db:
+    image: postgres:16-alpine
+    container_name: upgrade-platform-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: platform
+    ports:
+      - "5432:5432"
+    volumes:
+      - platform-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Tenant Database (simulates Neon tenant branch - UpGrade schema)
+  tenant-db:
+    image: postgres:16-alpine
+    container_name: upgrade-tenant-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: upgrade_tenant
+    ports:
+      - "5433:5432"
+    volumes:
+      - tenant-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # UpGrade Backend (from Carnegie Learning)
+  upgrade-backend:
+    image: carnegielearningweb/upgrade:latest
+    container_name: upgrade-backend
+    ports:
+      - "3030:3030"
+    environment:
+      NODE_ENV: development
+      APP_PORT: 3030
+      TYPEORM_TYPE: postgres
+      TYPEORM_HOST: tenant-db
+      TYPEORM_PORT: 5432
+      TYPEORM_USERNAME: postgres
+      TYPEORM_PASSWORD: postgres
+      TYPEORM_DATABASE: upgrade_tenant
+      TYPEORM_SYNCHRONIZE: "true"
+      GOOGLE_APPLICATION_CREDENTIALS: ""
+      CLIENT_API_SECRET: dev-secret
+    depends_on:
+      tenant-db:
+        condition: service_healthy
+
+volumes:
+  platform-db-data:
+  tenant-db-data:

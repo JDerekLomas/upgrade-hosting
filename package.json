@@ -1,0 +1,27 @@
+{
+  "name": "upgrade-hosting",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hosted multi-tenant A/B testing platform for EdTech",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:gateway": "npm run dev --workspace=apps/upgrade-gateway",
+    "dev:dashboard": "npm run dev --workspace=apps/upgrade-dashboard",
+    "dev:demo": "npm run dev --workspace=apps/demo",
+    "build": "npm run build --workspaces",
+    "docker:up": "cd apps/upgrade-platform && docker-compose up -d",
+    "docker:down": "cd apps/upgrade-platform && docker-compose down",
+    "setup": "cd apps/upgrade-platform && ./scripts/dev-setup.sh"
+  },
+  "keywords": [
+    "a/b-testing",
+    "edtech",
+    "education",
+    "experiments",
+    "upgrade"
+  ],
+  "author": "",
+  "license": "MIT"
+}
