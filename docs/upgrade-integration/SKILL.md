@@ -105,9 +105,48 @@ client.log('completion_time_ms', 45000);
                           ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                    UpGrade Backend                          │
-│            (Self-hosted or Carnegie Learning)               │
+│     (Hosted: upgrade-hosting | Self-hosted | Carnegie)      │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+## Deployment Options
+
+| Option | Best For | Setup |
+|--------|----------|-------|
+| **[Hosted Platform](https://github.com/JDerekLomas/upgrade-hosting)** | Most EdTech apps, quick start | Get API key, point SDK |
+| **Self-hosted** | Full control, on-prem requirements | Deploy UpGrade yourself |
+| **Carnegie Learning** | Enterprise, research partnerships | Contact Carnegie |
+
+### Using the Hosted Platform (Recommended)
+
+The easiest way to get started. See the [live demo](https://upgrade-demo.vercel.app).
+
+```typescript
+import UpgradeClient from 'upgrade_client_lib/dist/browser';
+
+const client = new UpgradeClient(
+  userId,
+  'https://api.upgrade-hosting.com/v1',  // Hosted platform
+  'your-app-context'
+);
+
+// Add your API key from the dashboard
+client.setCustomHeaders({
+  'X-API-Key': 'upg_live_your_key_here'
+});
+
+await client.init({
+  schoolId: 'lincoln-elementary',
+  classId: 'math-301',
+  teacherId: 'ms-rodriguez'
+});
+```
+
+Features of hosted platform:
+- **Multi-tenant isolation**: Each district/organization gets isolated database
+- **No infrastructure**: We manage UpGrade backend, you focus on your app
+- **Dashboard**: Manage experiments, API keys, view results
+- **FERPA-ready**: District-level data isolation for compliance
 
 ## CRITICAL: Known Pitfalls
 
@@ -252,7 +291,9 @@ User gets different condition than classmates
 
 ## External Resources
 
-- [UpGrade GitHub](https://github.com/CarnegieLearningWeb/UpGrade)
+- [Hosted Platform](https://github.com/JDerekLomas/upgrade-hosting) - Multi-tenant hosted UpGrade
+- [Live Demo](https://upgrade-demo.vercel.app) - Interactive walkthrough
+- [UpGrade GitHub](https://github.com/CarnegieLearningWeb/UpGrade) - Core UpGrade source
 - [UpGrade Documentation](https://upgrade-platform.gitbook.io/docs/)
 - [JavaScript SDK](https://github.com/CarnegieLearningWeb/UpGrade/tree/develop/clientlibs/js)
 - [LTI 1.3 Spec](https://www.imsglobal.org/spec/lti/v1p3)
