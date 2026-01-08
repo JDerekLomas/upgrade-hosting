@@ -2,7 +2,7 @@
 
 Hosted multi-tenant A/B testing platform for EdTech, built on [Carnegie Learning's UpGrade](https://github.com/CarnegieLearningWeb/UpGrade).
 
-**[Live Demo](https://upgrade-demo.vercel.app)** - Interactive walkthrough of A/B testing for education
+**[Website](https://upgrade-hosting.vercel.app)** | **[Live Demo](https://upgrade-demo.vercel.app)**
 
 ## Why EdTech Needs Specialized A/B Testing
 
@@ -45,6 +45,7 @@ Generic A/B testing tools (Optimizely, LaunchDarkly) fail in education because:
 
 | Component | Location | Description |
 |-----------|----------|-------------|
+| Website | `apps/website` | Marketing landing page |
 | API Gateway | `apps/upgrade-gateway` | SDK proxy, API key auth, rate limiting |
 | Dashboard | `apps/upgrade-dashboard` | Tenant UI, experiments, teams |
 | Platform | `apps/upgrade-platform` | Docker compose, local dev setup |
