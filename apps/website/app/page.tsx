@@ -48,10 +48,8 @@ function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-8">
-          <a href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-[#0047CC] flex items-center justify-center">
-              <FlaskConical className="w-6 h-6 text-white" />
-            </div>
+          <a href="/" className="flex items-center gap-3">
+            <img src="/images/upgrade-logo.png" alt="UpGrade" className="h-10 w-auto" />
             <span className="font-bold text-xl text-gray-900">UpGrade</span>
           </a>
 
@@ -150,17 +148,38 @@ function Hero() {
         </p>
       </div>
 
-      {/* Hero image mockup */}
-      <div className="max-w-4xl mx-auto mt-16 relative">
-        <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
-          <div className="bg-gray-100 px-4 py-3 border-b border-gray-200 flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-400" />
-            <div className="w-3 h-3 rounded-full bg-yellow-400" />
-            <div className="w-3 h-3 rounded-full bg-green-400" />
-            <span className="ml-4 text-sm text-gray-500">UpGrade Experiment Dashboard</span>
+      {/* Hero image - students learning */}
+      <div className="max-w-5xl mx-auto mt-16 relative">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
+          {/* Students image */}
+          <div className="relative">
+            <img
+              src="/images/hero-students.jpg"
+              alt="Students collaborating and learning together"
+              className="rounded-2xl shadow-2xl w-full"
+            />
+            <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 border border-gray-100">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                  <Check className="w-5 h-5 text-green-600" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-gray-900">+26% completion</div>
+                  <div className="text-xs text-gray-500">Progressive hints experiment</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="p-8 bg-gradient-to-br from-gray-50 to-white">
-            <div className="grid md:grid-cols-3 gap-6">
+
+          {/* Dashboard mockup */}
+          <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+            <div className="bg-gray-100 px-4 py-3 border-b border-gray-200 flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-red-400" />
+              <div className="w-3 h-3 rounded-full bg-yellow-400" />
+              <div className="w-3 h-3 rounded-full bg-green-400" />
+              <span className="ml-4 text-sm text-gray-500">Experiment Dashboard</span>
+            </div>
+            <div className="p-6 bg-gradient-to-br from-gray-50 to-white space-y-4">
               <MetricCard
                 label="Students Enrolled"
                 value="12,847"
@@ -209,18 +228,11 @@ function ValueProp() {
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
-            <div className="bg-gray-900 rounded-2xl p-1 shadow-2xl">
-              <div className="bg-gray-800 rounded-xl p-6">
-                <img
-                  src="/api/placeholder/600/400"
-                  alt="UpGrade dashboard showing experiment results"
-                  className="rounded-lg w-full"
-                />
-                <div className="mt-4 text-center text-gray-400 text-sm">
-                  Real-time experiment monitoring
-                </div>
-              </div>
-            </div>
+            <img
+              src="/images/macbook-dashboard.png"
+              alt="UpGrade dashboard showing experiment results on a MacBook"
+              className="w-full drop-shadow-2xl"
+            />
           </div>
 
           <div className="order-1 lg:order-2">
@@ -561,6 +573,8 @@ function Features() {
               'Multiple decision points per experiment',
               'Stratified randomization options',
             ]}
+            image="/images/data-dashboard.jpg"
+            imageAlt="Dashboard showing experiment analytics and results"
             imageOnLeft
           />
 
@@ -572,6 +586,8 @@ function Features() {
               'Students stay in same condition',
               'Teachers see consistent experience',
             ]}
+            image="/images/classroom-tech.jpg"
+            imageAlt="Students in classroom using educational technology"
             imageOnLeft={false}
           />
 
@@ -583,6 +599,8 @@ function Features() {
               'Real-time monitoring',
               'Automatic pause on guardrail breach',
             ]}
+            image="/images/student-tablet.jpg"
+            imageAlt="Student learning with tablet device"
             imageOnLeft
           />
         </div>
@@ -591,17 +609,23 @@ function Features() {
   );
 }
 
-function FeatureRow({ title, description, bullets, imageOnLeft }: {
+function FeatureRow({ title, description, bullets, image, imageAlt, imageOnLeft }: {
   title: string;
   description: string;
   bullets: string[];
+  image: string;
+  imageAlt: string;
   imageOnLeft: boolean;
 }) {
   return (
     <div className={`grid lg:grid-cols-2 gap-12 items-center ${imageOnLeft ? '' : 'lg:flex-row-reverse'}`}>
       <div className={imageOnLeft ? 'order-1' : 'order-1 lg:order-2'}>
-        <div className="bg-gray-100 rounded-2xl aspect-video flex items-center justify-center">
-          <div className="text-gray-400 text-sm">Feature screenshot</div>
+        <div className="rounded-2xl overflow-hidden shadow-lg">
+          <img
+            src={image}
+            alt={imageAlt}
+            className="w-full h-auto object-cover aspect-video"
+          />
         </div>
       </div>
       <div className={imageOnLeft ? 'order-2' : 'order-2 lg:order-1'}>
@@ -662,15 +686,22 @@ function Demo() {
 
           <div className="relative">
             <div className="bg-white/10 backdrop-blur rounded-2xl p-2 border border-white/20">
-              <div className="bg-gray-900 rounded-xl aspect-video flex items-center justify-center">
-                <a
-                  href="https://upgrade-demo.vercel.app"
-                  target="_blank"
-                  className="w-20 h-20 rounded-full bg-white/20 hover:bg-white/30 transition-colors flex items-center justify-center group"
-                >
-                  <Play className="w-8 h-8 text-white ml-1 group-hover:scale-110 transition-transform" />
-                </a>
-              </div>
+              <a
+                href="https://upgrade-demo.vercel.app"
+                target="_blank"
+                className="block relative group"
+              >
+                <img
+                  src="/images/animation.gif"
+                  alt="UpGrade platform demo showing experiment setup"
+                  className="rounded-xl w-full"
+                />
+                <div className="absolute inset-0 bg-black/30 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="w-20 h-20 rounded-full bg-white/30 flex items-center justify-center">
+                    <Play className="w-8 h-8 text-white ml-1" />
+                  </div>
+                </div>
+              </a>
             </div>
             <div className="text-center mt-4 text-blue-200 text-sm">
               No signup required
@@ -848,10 +879,8 @@ function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-[#0047CC] flex items-center justify-center">
-                <FlaskConical className="w-6 h-6 text-white" />
-              </div>
+            <div className="flex items-center gap-3 mb-4">
+              <img src="/images/upgrade-logo.png" alt="UpGrade" className="h-10 w-auto brightness-0 invert" />
               <span className="font-bold text-xl text-white">UpGrade</span>
             </div>
             <p className="text-sm leading-relaxed">
